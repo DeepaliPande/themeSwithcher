@@ -11,7 +11,7 @@ const handleClick=()=>
   setTheme(light):setTheme(dark)
   }
   return (
-    <ThemeProvider value={{theme,handleClick}}>
+    <ThemeProvider value={{theme,handleClick,light}}>
     <div className={`main-container ${theme===light ?`${lightColor} ${lightTxtColor}`:`${darkColor} ${darkTxtColor}`}`}>
     <div className="text-center">
      <h1>Light dark theme project</h1>

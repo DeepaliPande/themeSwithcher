@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTheme } from '../context/Themecomtext';
 const Post = () => {
-    const {theme,handleClick}=useTheme();
+    const {light,handleClick,theme}=useTheme();
     return (
         <div>
             <h4>My post with {theme}</h4>
-            <button className='btn btn-dark' onClick={handleClick}>Dark</button>
+            <button className={`btn  ${theme!==light ?` btn-light `:`btn-dark`}`} onClick={handleClick}>Dark</button>
         </div>
     );
 }
