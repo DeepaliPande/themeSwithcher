@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import PostComp from './components/Post';
+import { ThemeProvider,useTheme } from './context/Themecomtext';
 function App() {
+  const {light,dark,lightColor,darkColor,lightTxtColor,darkTxtColor}=useTheme();
+const [theme,setTheme]=useState(light);
+const handleClick=()=>
+{
+  theme!==light?
+  setTheme(light):setTheme(dark)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ThemeProvider value={{theme,handleClick}}>
+    <div className={`main-container ${theme===light ?`${lightColor} ${lightTxtColor}`:`${darkColor} ${darkTxtColor}`}`}>
+    <div className="text-center">
+     <h1>Light dark theme project</h1>
+     <PostComp theme={theme}/>
     </div>
+    </div>
+    </ThemeProvider>
   );
 }
 
