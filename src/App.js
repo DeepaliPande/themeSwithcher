@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState,Suspense,lazy } from 'react';
 import './App.css';
-import PostComp from './components/Post';
+//import PostComp from './components/Post';
 import { ThemeProvider,useTheme } from './context/Themecomtext';
 import { UserProvider, useUserData } from './context/UserContext';
-import Button from './common/Button';
+const PostComp=lazy(()=>import('./components/Post'))
 function App() {
   const {light,dark,lightColor,darkColor,lightTxtColor,darkTxtColor}=useTheme();
  const {user}=useUserData();
@@ -19,6 +19,9 @@ const handleClick=()=>
     setUserCity(name);
   }
   return (
+
+    <Suspense fallback={<h1>Please wait.....</h1>}>
+
     <ThemeProvider value={{theme,handleClick,light}}>
       <UserProvider value={{user,Usercity}} >
     <div className={`main-container ${theme===light ?`${lightColor} ${lightTxtColor}`:`${darkColor} ${darkTxtColor}`}`}>
@@ -30,6 +33,8 @@ const handleClick=()=>
     </div>
     </UserProvider>
     </ThemeProvider>
+    </Suspense>
+
   );
 }
 
